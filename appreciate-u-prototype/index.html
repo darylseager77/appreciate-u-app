@@ -243,6 +243,8 @@
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             padding: 60px 20px;
             color: white;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .cta-buttons {
             display: grid;
@@ -259,8 +261,9 @@
             transition: all 0.3s;
             border: 2px solid transparent;
         }
-        .cta-button.team member {
-            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+        .cta-button.employee {
+            background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+            border: 2px solid rgba(255,255,255,0.2);
         }
         .cta-button.manager {
             background: linear-gradient(135deg, #059669 0%, #10b981 100%);
@@ -461,51 +464,49 @@
 
     <!-- Two Column Section: Problem/Solution + Comparison -->
     <div class="two-column-section">
-        <div class="two-column-grid">
-            <!-- Left Column: Problem + Other Platforms -->
-            <div class="problem-solution">
-                <div class="problem-box">
-                    <div class="box-title">❌ The Problem</div>
-                    <div class="box-content">
-                        <p style="margin-bottom: 10px;">Most team member recognition programs fail because they're one-size-fits-all. What makes one person feel valued might make another uncomfortable.</p>
+        <!-- Row 1: Problem and Solution -->
+        <div class="two-column-grid" style="margin-bottom: 24px;">
+            <div class="problem-box">
+                <div class="box-title">❌ The Problem</div>
+                <div class="box-content">
+                    <p style="margin-bottom: 10px;">Most team member recognition programs fail because they're one-size-fits-all. What makes one person feel valued might make another uncomfortable.</p>
 
-                        <p><strong>The result?</strong> Your best people leave. Teams disengage. Managers burn out. You're spending money on recognition that doesn't move the needle.</p>
-                    </div>
-                </div>
-
-                <div class="comparison-column other" style="margin-top: 20px;">
-                    <h3 class="comparison-title">OTHER PLATFORMS:</h3>
-                    <ul class="comparison-list">
-                        <li>❌ 30-question surveys → Survey fatigue</li>
-                        <li>❌ Complex dashboards → Hours to learn</li>
-                        <li>❌ Generic action plans → Nothing fits</li>
-                        <li>❌ Constant admin work → Process over people</li>
-                        <li>❌ Top-down approach → People resist</li>
-                    </ul>
+                    <p><strong>The result?</strong> Your best people leave. Teams disengage. Managers burn out. You're spending money on recognition that doesn't move the needle.</p>
                 </div>
             </div>
 
-            <!-- Right Column: Solution + Appreciate U -->
-            <div class="problem-solution">
-                <div class="solution-box">
-                    <div class="box-title">✅ The Solution</div>
-                    <div class="box-content">
-                        <p style="margin-bottom: 10px;"><strong>Appreciate U helps leaders understand each team member's unique preferences</strong> and gives them personalized suggestions.</p>
+            <div class="solution-box">
+                <div class="box-title">✅ The Solution</div>
+                <div class="box-content">
+                    <p style="margin-bottom: 10px;"><strong>Appreciate U helps leaders understand each team member's unique preferences</strong> and gives them personalized suggestions.</p>
 
-                        <p>When people feel valued in the way that matters to <em>them</em>, they stay longer, perform better, and actually want to show up to work.</p>
-                    </div>
+                    <p>When people feel valued in the way that matters to <em>them</em>, they stay longer, perform better, and actually want to show up to work.</p>
                 </div>
+            </div>
+        </div>
 
-                <div class="comparison-column appreciate" style="margin-top: 20px;">
-                    <h3 class="comparison-title">APPRECIATE U:</h3>
-                    <ul class="comparison-list">
-                        <li>✅ 25-question quiz → 5 minutes, done once</li>
-                        <li>✅ 30-second check-ins → Quick pulse</li>
-                        <li>✅ Personalized suggestions → Specific to each person</li>
-                        <li>✅ Zero admin work → Automated insights</li>
-                        <li>✅ Team member-driven → People choose to share</li>
-                    </ul>
-                </div>
+        <!-- Row 2: Other Platforms and Appreciate U -->
+        <div class="two-column-grid">
+            <div class="comparison-column other">
+                <h3 class="comparison-title">OTHER PLATFORMS:</h3>
+                <ul class="comparison-list">
+                    <li>❌ 30-question surveys → Survey fatigue</li>
+                    <li>❌ Complex dashboards → Hours to learn</li>
+                    <li>❌ Generic action plans → Nothing fits</li>
+                    <li>❌ Constant admin work → Process over people</li>
+                    <li>❌ Top-down approach → People resist</li>
+                </ul>
+            </div>
+
+            <div class="comparison-column appreciate">
+                <h3 class="comparison-title">APPRECIATE U:</h3>
+                <ul class="comparison-list">
+                    <li>✅ 25-question quiz → 5 minutes, done once</li>
+                    <li>✅ 30-second check-ins → Quick pulse</li>
+                    <li>✅ Personalized suggestions → Specific to each person</li>
+                    <li>✅ Zero admin work → Automated insights</li>
+                    <li>✅ Team member-driven → People choose to share</li>
+                </ul>
             </div>
         </div>
     </div>
