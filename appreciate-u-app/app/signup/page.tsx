@@ -11,6 +11,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [role, setRole] = useState<'employee' | 'manager'>('employee')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -20,7 +21,6 @@ export default function SignupPage() {
     setError('')
 
     try {
-      // Sign up the user
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -34,7 +34,16 @@ export default function SignupPage() {
 
       if (signUpError) throw signUpError
 
-      // Success! Redirect to a welcome or dashboard page
+      // Save profile with role
+      if (data.user) {
+        await supabase.from('profiles').insert({
+          id: data.user.id,
+          email: email,
+          full_name: fullName,
+          role: role
+        })
+      }
+
       alert('Account created! Check your email to verify your account.')
       router.push('/login')
     } catch (err: any) {
@@ -135,6 +144,42 @@ export default function SignupPage() {
               }}
               placeholder="Acme Inc"
             />
+          </div>
+
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{
+              display: 'block',
+              fontSize: '14px',
+              fontWeight: '600',
+              marginBottom: '8px',
+              color: 'var(--text-primary)'
+            }}>
+              I am a...
+            </label>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {(['employee', 'manager'] as const).map(r => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRole(r)}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    border: role === r ? '2px solid var(--primary)' : '2px solid var(--border)',
+                    borderRadius: '8px',
+                    background: role === r ? '#f0f0ff' : 'white',
+                    color: role === r ? 'var(--primary)' : 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textTransform: 'capitalize'
+                  }}
+                >
+                  {r === 'employee' ? '👤 Employee' : '💼 Manager'}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div style={{ marginBottom: '20px' }}>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { supabase } from '@/lib/supabase'
 
 interface AppreciationProfile {
   quality_time: number
@@ -16,31 +17,31 @@ const languageInfo = {
   quality_time: {
     emoji: '⏰',
     name: 'Quality Time',
-    description: '1-on-1s, deep conversations, being heard',
+    description: 'You feel most valued when your manager or teammates spend dedicated time with you - whether that\'s regular check-ins, grabbing coffee, or having deep conversations about your work and growth.',
     color: '#8b5cf6'
   },
   recognition: {
     emoji: '🌟',
     name: 'Recognition',
-    description: 'Verbal acknowledgment, thank yous, praise',
+    description: 'Verbal acknowledgment matters to you. You appreciate when people thank you, recognise your contributions publicly or privately, and give you specific feedback on what you\'re doing well.',
     color: '#f59e0b'
   },
   support: {
     emoji: '🤝',
     name: 'Support',
-    description: 'Help with workload, removing blockers, flexibility',
+    description: 'Actions speak volumes. You value when others help you with your workload, remove blockers, or provide flexibility when you need it.',
     color: '#10b981'
   },
   rewards: {
     emoji: '🎁',
     name: 'Rewards',
-    description: 'Tangible appreciation like bonuses, gifts, time off',
+    description: 'Tangible appreciation matters, whether that\'s bonuses, gifts, extra time off, or learning opportunities. You like when appreciation comes with something concrete.',
     color: '#ef4444'
   },
   inclusion: {
     emoji: '👥',
     name: 'Inclusion',
-    description: 'Being included in decisions, meetings, team activities',
+    description: 'Being part of the team is important to you. You value being invited to meetings, included in decisions, and participating in team activities.',
     color: '#3b82f6'
   }
 }
@@ -50,15 +51,40 @@ export default function ResultsPage() {
   const [profile, setProfile] = useState<AppreciationProfile | null>(null)
 
   useEffect(() => {
-    // Get results from localStorage
+    loadProfile()
+  }, [])
+
+  const loadProfile = async () => {
+    // Try Supabase first (permanent storage)
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (user) {
+      const { data } = await supabase
+        .from('appreciation_profiles')
+        .select('quality_time_pct, recognition_pct, support_pct, rewards_pct, inclusion_pct')
+        .eq('user_id', user.id)
+        .single()
+
+      if (data) {
+        setProfile({
+          quality_time: data.quality_time_pct,
+          recognition: data.recognition_pct,
+          support: data.support_pct,
+          rewards: data.rewards_pct,
+          inclusion: data.inclusion_pct
+        })
+        return
+      }
+    }
+
+    // Fall back to localStorage
     const storedProfile = localStorage.getItem('appreciation_profile')
     if (storedProfile) {
       setProfile(JSON.parse(storedProfile))
     } else {
-      // No profile found, redirect to quiz
       router.push('/quiz')
     }
-  }, [router])
+  }
 
   if (!profile) {
     return (
@@ -109,26 +135,26 @@ export default function ResultsPage() {
           const percentage = profile[language]
 
           return (
-            <div key={language} style={{ marginBottom: index === sortedLanguages.length - 1 ? 0 : '20px' }}>
+            <div key={language} style={{
+              marginBottom: index === sortedLanguages.length - 1 ? 0 : '28px',
+              paddingBottom: index === sortedLanguages.length - 1 ? 0 : '28px',
+              borderBottom: index === sortedLanguages.length - 1 ? 'none' : '1px solid var(--border)'
+            }}>
+              {/* Name, emoji and percentage row */}
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '8px'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '24px' }}>{info.emoji}</span>
-                  <div>
-                    <div style={{ fontSize: '15px', fontWeight: '600', color: 'var(--text-primary)' }}>
-                      {info.name}
-                    </div>
-                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                      {info.description}
-                    </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '28px' }}>{info.emoji}</span>
+                  <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    {info.name}
                   </div>
                 </div>
                 <div style={{
-                  fontSize: '20px',
+                  fontSize: '22px',
                   fontWeight: '700',
                   color: info.color
                 }}>
@@ -142,7 +168,8 @@ export default function ResultsPage() {
                 height: '12px',
                 background: '#f3f4f6',
                 borderRadius: '6px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                marginBottom: '12px'
               }}>
                 <div style={{
                   width: `${percentage}%`,
@@ -153,6 +180,11 @@ export default function ResultsPage() {
                   animation: 'fillBar 0.8s ease-out'
                 }} />
               </div>
+
+              {/* Description below bar */}
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+                {info.description}
+              </p>
             </div>
           )
         })}

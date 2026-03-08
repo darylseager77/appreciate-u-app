@@ -72,8 +72,21 @@ export default function QuizPage() {
     const { data: { user } } = await supabase.auth.getUser()
 
     if (user) {
-      // Save to database (you'll need to create this table)
-      // For now, we'll just store in localStorage and redirect
+      // Save to Supabase using the correct column names
+      await supabase
+        .from('appreciation_profiles')
+        .upsert({
+          user_id: user.id,
+          quality_time_pct: percentages.quality_time,
+          recognition_pct: percentages.recognition,
+          support_pct: percentages.support,
+          rewards_pct: percentages.rewards,
+          inclusion_pct: percentages.inclusion,
+          quiz_completed: true,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id' })
+
+      // Also store in localStorage as a backup for immediate display
       localStorage.setItem('appreciation_profile', JSON.stringify(percentages))
     }
 
