@@ -136,6 +136,12 @@
             margin-top: 4px;
             line-height: 1.4;
         }
+        .stat-source {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 6px;
+            font-style: italic;
+        }
         .column-title {
             font-size: 24px;
             font-weight: 700;
@@ -252,7 +258,7 @@
         }
         .cta-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-top: 40px;
         }
@@ -439,15 +445,29 @@
             }
         }
         @media (max-width: 768px) {
+            .hero { padding: 40px 16px; }
             .hero h1 { font-size: 32px; }
-            .hero h2 { font-size: 22px; }
-            .section-title { font-size: 24px; }
+            .hero h2 { font-size: 20px; }
+            .section-title { font-size: 22px; }
             .column-title { font-size: 20px; }
             .stat-number { font-size: 28px; }
             .stats-grid { grid-template-columns: 1fr; }
-            .burnout-stats {
-                grid-template-columns: 1fr;
-            }
+            .burnout-stats { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-buttons { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 26px; }
+            .hero h2 { font-size: 17px; }
+            .hero p { font-size: 15px; }
+            .burnout-stats { grid-template-columns: 1fr; }
+            .languages-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .cta-button { padding: 24px 16px; }
+            .cta-title { font-size: 20px; }
+            .two-column-section { padding: 32px 16px; }
+            .languages-section, .features-section { padding: 32px 16px; }
+            .different-section { padding: 32px 16px; }
         }
     </style>
 </head>
@@ -463,7 +483,7 @@
         <h1>Appreciate U</h1>
         <h2>When people feel valued, in the way that matters to them, they show up</h2>
         <p>Most leaders are guessing. We help you know.</p>
-        <div class="hero-badge">Interactive Prototype - February 2026</div>
+        <div class="hero-badge">Interactive Prototype - March 2026</div>
     </div>
 
     <!-- Two Column Section: Problem/Solution + Comparison -->
@@ -525,15 +545,18 @@
             <div class="burnout-stats" style="background: #f0fdf4; border-color: #bbf7d0; grid-template-columns: repeat(3, 1fr);">
                 <div class="stat-item">
                     <span class="stat-num" style="color: #15803d;">45%</span>
-                    <span class="stat-text" style="color: #14532d;">reduction in turnover with personalized recognition</span>
+                    <span class="stat-text" style="color: #14532d;">reduction in turnover with personalised recognition</span>
+                    <span class="stat-source" style="color: #4ade80;">Source: Gallup, State of the Global Workplace 2023</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-num" style="color: #15803d;">3.7x</span>
-                    <span class="stat-text" style="color: #14532d;">more engaged teams with strong appreciation culture</span>
+                    <span class="stat-text" style="color: #14532d;">more engaged teams with a strong appreciation culture</span>
+                    <span class="stat-source" style="color: #4ade80;">Source: O.C. Tanner Global Culture Report 2024</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num" style="color: #15803d;">$Millions</span>
-                    <span class="stat-text" style="color: #14532d;">saved per year in retention costs</span>
+                    <span class="stat-num" style="color: #15803d;">£30,000+</span>
+                    <span class="stat-text" style="color: #14532d;">average cost to replace one employee in the UK</span>
+                    <span class="stat-source" style="color: #4ade80;">Source: CIPD Resourcing & Talent Planning Report 2023</span>
                 </div>
             </div>
         </div>
