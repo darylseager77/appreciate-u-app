@@ -152,7 +152,7 @@ export default function ManagerPage() {
               How your team is doing today
             </p>
           </div>
-          <Link href="/dashboard" style={{
+          <Link href="/team-member" style={{
             fontSize: '13px',
             color: 'var(--primary)',
             fontWeight: '600',

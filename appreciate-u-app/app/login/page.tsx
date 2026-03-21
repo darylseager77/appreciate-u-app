@@ -25,8 +25,14 @@ export default function LoginPage() {
 
       if (signInError) throw signInError
 
-      // Success! Redirect to dashboard
-      router.push('/dashboard')
+      // Redirect based on role
+      const { data: profileData } = await supabase
+        .from('profiles').select('role').eq('id', data.user?.id).single()
+      if (profileData?.role === 'manager') {
+        router.push('/manager')
+      } else {
+        router.push('/team-member')
+      }
     } catch (err: any) {
       setError(err.message || 'Invalid email or password')
     } finally {
