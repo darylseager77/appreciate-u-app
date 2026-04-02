@@ -23,11 +23,11 @@ const languageInfo: { [key: string]: { emoji: string; name: string; color: strin
 }
 
 const checkInOptions = [
-  { emoji: '😔', label: 'Struggling', value: 1, color: '#ef4444' },
-  { emoji: '😕', label: 'Not great', value: 2, color: '#f97316' },
-  { emoji: '😐', label: 'Okay', value: 3, color: '#eab308' },
-  { emoji: '🙂', label: 'Good', value: 4, color: '#84cc16' },
-  { emoji: '😄', label: 'Great!', value: 5, color: '#10b981' }
+  { emoji: '😢', label: 'Struggling', value: 1, color: '#dc2626' },
+  { emoji: '😕', label: 'Not great', value: 2, color: '#ef4444' },
+  { emoji: '😐', label: 'Okay', value: 3, color: '#f59e0b' },
+  { emoji: '🙂', label: 'Good', value: 4, color: '#22c55e' },
+  { emoji: '😄', label: 'Great!', value: 5, color: '#15803d' }
 ]
 
 const needsOptions = [
@@ -180,14 +180,23 @@ export default function TeamMemberPage() {
                 alignItems: 'center',
                 gap: '6px',
                 padding: '12px 4px',
-                background: checkInSelected === option.value ? option.color + '20' : 'white',
+                background: checkInSelected === option.value ? option.color + '15' : 'white',
                 border: checkInSelected === option.value ? `2px solid ${option.color}` : '2px solid var(--border)',
                 borderRadius: '12px',
                 cursor: 'pointer',
                 transition: 'all 0.2s'
               }}
             >
-              <span style={{ fontSize: '28px' }}>{option.emoji}</span>
+              <div style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: option.color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '22px'
+              }}>{option.emoji}</div>
               <span style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: '500' }}>
                 {option.label}
               </span>
