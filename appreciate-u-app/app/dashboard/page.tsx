@@ -180,24 +180,16 @@ export default function DashboardPage() {
                 alignItems: 'center',
                 gap: '6px',
                 padding: '12px 4px',
-                background: checkInSelected === option.value ? option.color + '15' : 'white',
-                border: checkInSelected === option.value ? `2px solid ${option.color}` : '2px solid var(--border)',
+                background: option.color,
+                border: checkInSelected === option.value ? '3px solid #111827' : '2px solid transparent',
                 borderRadius: '12px',
                 cursor: 'pointer',
-                transition: 'all 0.2s'
+                transition: 'all 0.2s',
+                opacity: checkInSelected !== null && checkInSelected !== option.value ? 0.5 : 1
               }}
             >
-              <div style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                background: option.color,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '22px'
-              }}>{option.emoji}</div>
-              <span style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: '500' }}>
+              <span style={{ fontSize: '28px' }}>{option.emoji}</span>
+              <span style={{ fontSize: '11px', color: 'white', fontWeight: '600' }}>
                 {option.label}
               </span>
             </button>
