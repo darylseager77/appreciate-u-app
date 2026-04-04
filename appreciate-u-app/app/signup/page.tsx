@@ -176,7 +176,7 @@ export default function SignupPage() {
                     textTransform: 'capitalize'
                   }}
                 >
-                  {r === 'employee' ? '👤 Employee' : '💼 Manager'}
+                  {r === 'employee' ? '👤 Team Member' : '💼 Manager'}
                 </button>
               ))}
             </div>
